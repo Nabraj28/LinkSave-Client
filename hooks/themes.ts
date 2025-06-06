@@ -1,0 +1,25 @@
+export const themes = {
+    light: {
+        background: '#FFFFFF',
+        text: '#000000',
+        subheader: '',
+        activeIcon: '',
+        inactiveIcon: '',
+        primary: '#8875FF',
+        secondary: '#5856D6',
+        border: '#E5E5EA',
+        card: '#F2F2F7',
+    },
+    dark: {
+        background: '#121212',
+        text: '#FFFFFF',
+        subheader: '#a4a4a6',
+        activeIcon: '',
+        inactiveIcon: '',
+        primary: '#8875FF',
+        secondary: '#5E5CE6',
+        border: '#979797',
+        input: '#1D1D1D',
+        card: '#1C1C1E',
+    },
+};
