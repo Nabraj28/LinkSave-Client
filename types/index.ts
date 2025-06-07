@@ -61,11 +61,19 @@ export interface Link {
     url: string
 }
 
+export interface IconProps {
+    size: number;
+    color: string;
+    focused: boolean;
+    indicatorColor?: string;
+}
+
 // types/theme.ts
 export type ThemeName = 'light' | 'dark';
 
 export interface ThemeColors {
     background: string;
+    tabbackground: string;
     text: string;
     subheader?: string;
     activeIcon: string;

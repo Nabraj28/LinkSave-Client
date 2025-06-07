@@ -41,7 +41,7 @@ const Login = () => {
                         onPress={handleBack}
                         name="chevron-thin-left"
                         size={18}
-                        color="white"
+                        color={colors.text}
                     />
                     <Text style={styles.headerText}>Login</Text>
                     <View style={styles.formContainer}>

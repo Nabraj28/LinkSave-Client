@@ -41,7 +41,7 @@ const Register = () => {
                         onPress={handleBack}
                         name="chevron-thin-left"
                         size={18}
-                        color="white"
+                        color={colors.text}
                     />
                     <Text style={styles.headerText}>Register</Text>
                     <View style={styles.formContainer}>

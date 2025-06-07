@@ -1,6 +1,7 @@
 import { ThemeColors } from "@/types";
 import { StatusBar, StyleSheet, TextStyle } from "react-native";
 
+
 const authStyles = (colors: ThemeColors) => {
 
     const baseText: TextStyle = {
@@ -80,6 +81,7 @@ const authStyles = (colors: ThemeColors) => {
         footerText: {
             color: colors.subheader,
             textAlign: 'center',
+            paddingBottom: 30
         },
 
         linkText: {
