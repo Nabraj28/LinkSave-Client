@@ -29,7 +29,7 @@ export interface RegisterRequest {
     password: string
 }
 
-export interface AuthResponse {
+export interface LinkSaveResponse {
     success: boolean,
     message: string,
     user: User,
@@ -46,19 +46,28 @@ export interface User {
     _id: string
     username: string
     email: string,
-    categories: Category[]
+    categories: CategoryResponse[]
 }
 
-export interface Category {
-    _id: string,
-    name: string,
-    links: Link[]
+export interface CategoryProps {
+    isLoading: boolean;
+    data?: LinkSaveResponse;
+    selectedCategory?: CategoryResponse | null
+    onSelect?: (item: CategoryResponse) => void
 }
+export interface CategoryResponse {
+    _id?: string,
+    name: string,
+    links: Link[],
+    _v?: number
+}
+
 
 export interface Link {
     _id: string,
     title: string,
-    url: string
+    url: string,
+    __v: number
 }
 
 export interface IconProps {

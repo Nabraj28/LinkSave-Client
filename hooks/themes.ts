@@ -18,7 +18,7 @@ export const themes = {
         subheader: '#a4a4a6',
         activeIcon: '#FFFFFF',
         inactiveIcon: '#FDFCFA',
-        primary: '#8875FF',
+        primary: '#1A80E5',
         secondary: '#5E5CE6',
         border: '#979797',
         input: '#1D1D1D',

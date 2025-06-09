@@ -5,7 +5,7 @@ import { StatusBar, StyleSheet, TextStyle } from "react-native";
 const authStyles = (colors: ThemeColors) => {
 
     const baseText: TextStyle = {
-        fontFamily: 'serif',
+        fontFamily: 'WorkSans-Regular',
         fontSize: 16,
         color: colors.text
     }
@@ -31,7 +31,7 @@ const authStyles = (colors: ThemeColors) => {
 
         headerText: {
             fontSize: 32,
-            fontFamily: 'serif',
+            fontFamily: 'WorkSans-Bold',
             color: colors.text
         },
 
@@ -81,11 +81,14 @@ const authStyles = (colors: ThemeColors) => {
         footerText: {
             color: colors.subheader,
             textAlign: 'center',
-            paddingBottom: 30
+            paddingBottom: 30,
+            fontFamily: 'WorkSans-Regular',
+            fontSize: 16
+
         },
 
         linkText: {
-            fontWeight: 600
+            fontFamily: 'WorkSans-Bold',
         }
     })
 }

@@ -6,7 +6,7 @@ const welcomeStyles = (colors: ThemeColors) => {
     const textStyle: TextStyle = {
         textAlign: 'center',
         color: colors.text,
-        fontFamily: 'serif',
+        fontFamily: 'WorkSans-Regular',
         fontSize: 16
     }
 
@@ -36,6 +36,7 @@ const welcomeStyles = (colors: ThemeColors) => {
 
         headerText: {
             ...textStyle,
+            fontFamily: 'WorkSans-Bold',
             fontSize: 32,
         },
 

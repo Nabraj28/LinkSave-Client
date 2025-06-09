@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import React from "react";
 import Toast from "react-native-toast-message";
+import { useFonts, WorkSans_700Bold, WorkSans_400Regular } from '@expo-google-fonts/work-sans';
 
 const client = new QueryClient();
 
@@ -31,7 +32,12 @@ function UnauthenticatedStack() {
 function AuthGate() {
   const { authState } = useAuth();
 
-  if (authState.isLoading) return <Loader />;
+  const [fontsLoaded] = useFonts({
+    'WorkSans-Regular': WorkSans_400Regular,
+    'WorkSans-Bold': WorkSans_700Bold,
+  });
+
+  if (authState.isLoading || !fontsLoaded) return <Loader />;
 
   return authState.isAuthenticated ? <AuthenticatedStack /> : <UnauthenticatedStack />;
 }

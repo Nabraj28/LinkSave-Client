@@ -59,6 +59,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         try {
             const userId = await AsyncStorage.getItem('user');
             const token = await AsyncStorage.getItem('authToken');
+
             if (token && userId) {
                 setAuthState({
                     user: JSON.parse(userId),
