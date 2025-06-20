@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 import tabStyles from "@/styles/tabStyles";
-import { useTheme } from "@/hooks/useTheme";
+import { useTheme } from "@/data/hooks/useTheme";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { HomeIcon } from "@/assets/icons/HomeIcon";
@@ -19,7 +19,7 @@ const Layout: React.FunctionComponent = () => {
             screenOptions={{
                 headerShown: false,
                 sceneStyle: styles.sceneStyles,
-                tabBarActiveTintColor: colors.activeIcon,
+                tabBarActiveTintColor: colors.primary,
                 tabBarInactiveTintColor: colors.inactiveIcon,
                 tabBarLabelPosition: 'beside-icon',
                 tabBarStyle: styles.tabBarStyles,

@@ -1,4 +1,4 @@
-import { LinkSaveResponse, MutationHookProps, RegisterRequest } from "@/types"
+import { LinkSaveResponse, MutationHookProps, RegisterRequest } from "@/data/types"
 import { postData } from "@/utils/apiUtils"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useMutation } from "@tanstack/react-query"

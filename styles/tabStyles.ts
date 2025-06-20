@@ -1,4 +1,4 @@
-import { ThemeColors } from "@/types";
+import { ThemeColors } from "@/data/types";
 import { StatusBar, StyleSheet, Dimensions } from "react-native";
 
 

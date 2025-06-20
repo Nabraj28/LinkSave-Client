@@ -1,9 +1,10 @@
 export const themes = {
     light: {
-        background: '#FFFFFF',
+        background: '#F8F8F8',
         tabbackground: '#FFFFFF',
         text: '#000000',
         subheader: '',
+        danger: '#D0312D',
         activeIcon: '#000',
         inactiveIcon: '#999',
         primary: '#1A80E5',
@@ -16,6 +17,7 @@ export const themes = {
         tabbackground: '#363636',
         text: '#FFFFFF',
         subheader: '#a4a4a6',
+        danger: '#D0312D',
         activeIcon: '#FFFFFF',
         inactiveIcon: '#FDFCFA',
         primary: '#1A80E5',

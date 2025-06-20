@@ -1,6 +1,6 @@
-import useLogin from "@/hooks/useLogin";
-import useRegister from "@/hooks/useRegister";
-import { AuthContextType, AuthState, LoginRequest, RegisterRequest } from "@/types";
+import useLogin from "@/data/hooks/useLogin";
+import useRegister from "@/data/hooks/useRegister";
+import { AuthContextType, AuthState, LoginRequest, RegisterRequest } from "@/data/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Toast from "react-native-toast-message";

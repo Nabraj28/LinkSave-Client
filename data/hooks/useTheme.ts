@@ -1,5 +1,5 @@
 import { ThemeContext } from '@/context/ThemeContext';
-import { ThemeName } from '@/types';
+import { ThemeName } from '@/data/types';
 import { useContext } from 'react';
 import { themes } from './themes';
 

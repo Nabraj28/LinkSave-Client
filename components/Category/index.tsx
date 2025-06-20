@@ -1,14 +1,14 @@
 import { FlatList, TouchableOpacity, View, Text } from 'react-native';
 import React, { useEffect, useMemo } from 'react';
-import { CategoryProps, CategoryResponse } from '@/types';
-import { useTheme } from '@/hooks/useTheme';
+import { CategoryProps, CategoryResponse } from '@/data/types';
+import { useTheme } from '@/data/hooks/useTheme';
 import { homeStyles } from '@/styles/homeStyles';
 import { AntDesign } from '@expo/vector-icons';
-import Skeleton from '../Skeleton';
-import useCategoryStore from '@/store/useCategoryStore';
+import useCategoryStore from '@/data/store/useCategoryStore';
+import AppSkeleton from '../Skeleton';
 
 
-const Category = ({ isLoading, data }: CategoryProps) => {
+const Category = ({ isLoading, data, toggleAddModal }: CategoryProps) => {
 
     const { colors } = useTheme();
     const styles = homeStyles(colors);
@@ -21,7 +21,7 @@ const Category = ({ isLoading, data }: CategoryProps) => {
         return [{ _id: 'all', name: 'All', links: allLinks }, ...categories];
     }, [categories]);
 
-    const { selectedCategory, setSelectedCategory } = useCategoryStore()
+    const { selectedCategory, setSelectedCategory } = useCategoryStore();
 
     useEffect(() => {
         if (!isLoading && extendedData.length > 0) {
@@ -34,10 +34,13 @@ const Category = ({ isLoading, data }: CategoryProps) => {
         return (
             <React.Fragment>
                 {typeof item === 'number' ? (
-                    <Skeleton width={80} height={60} />
+                    <AppSkeleton width={80} height={60} />
                 ) : (
-                    <TouchableOpacity onPress={() => setSelectedCategory(item)}>
-                        <Text style={item.name === selectedCategory?.name ? styles.selectedItem : styles.notSelectedItem}>
+                    <TouchableOpacity
+                        style={item.name === selectedCategory?.name ? styles.selectedCatButton : styles.notSelectedCatButton}
+                        onPress={() => setSelectedCategory(item)}
+                    >
+                        <Text style={item.name === selectedCategory?.name ? styles.selectedButtonText : styles.notSelectedButtonText}>
                             {item.name}
                         </Text>
                     </TouchableOpacity>
@@ -59,9 +62,11 @@ const Category = ({ isLoading, data }: CategoryProps) => {
                 style={styles.category}
                 contentContainerStyle={styles.flatlistGap}
             />
-            <TouchableOpacity style={styles.addButton}>
-                <AntDesign name="plus" size={24} color="white" />
-            </TouchableOpacity>
+            <View style={styles.addButtonContainer}>
+                <TouchableOpacity disabled={isLoading} onPress={toggleAddModal} style={styles.addButton}>
+                    <AntDesign name="plus" size={24} color="white" />
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };

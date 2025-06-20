@@ -1,3 +1,5 @@
+import React from "react";
+
 
 export interface MutationHookProps<T> {
     cb?: () => void;
@@ -52,6 +54,7 @@ export interface User {
 export interface CategoryProps {
     isLoading: boolean;
     data?: LinkSaveResponse;
+    toggleAddModal?: () => void;
     selectedCategory?: CategoryResponse | null
     onSelect?: (item: CategoryResponse) => void
 }
@@ -92,9 +95,22 @@ export interface ThemeColors {
     border: string;
     input?: string;
     card: string;
+    danger: string
 }
 
 export interface Theme {
     name: ThemeName;
     colors: ThemeColors;
+}
+
+export interface LinkCardProps {
+    item: Link | number;
+    getCategoryName: (item: Link) => React.ReactNode;
+}
+
+export interface UpsertModalProps {
+    title: string;
+    visible: boolean;
+    onClose: () => void;
+    children: React.ReactNode
 }

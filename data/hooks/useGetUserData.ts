@@ -1,4 +1,4 @@
-import { LinkSaveResponse } from "@/types"
+import { LinkSaveResponse } from "@/data/types"
 import { getData } from "@/utils/apiUtils"
 import { useQuery } from "@tanstack/react-query"
 

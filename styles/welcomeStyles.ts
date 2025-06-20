@@ -1,4 +1,4 @@
-import { ThemeColors } from "@/types";
+import { ThemeColors } from "@/data/types";
 import { StatusBar, StyleSheet, TextStyle, ViewStyle } from "react-native";
 
 const welcomeStyles = (colors: ThemeColors) => {

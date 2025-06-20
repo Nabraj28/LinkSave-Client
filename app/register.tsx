@@ -1,4 +1,4 @@
-import { useTheme } from '@/hooks/useTheme';
+import { useTheme } from '@/data/hooks/useTheme';
 import authStyles from '@/styles/authStyles';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Link, useRouter } from 'expo-router';
@@ -6,7 +6,7 @@ import React from 'react';
 import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RegisterModel, RegisterSchema } from '@/models/RegisterModel';
+import { RegisterModel, RegisterSchema } from '@/data/models/RegisterModel';
 import { useAuth } from '@/context/AuthContext';
 
 const Register = () => {

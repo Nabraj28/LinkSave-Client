@@ -1,25 +1,48 @@
-import { ThemeColors } from "@/types";
-import { StyleSheet, TextStyle } from "react-native";
+import { ThemeColors } from "@/data/types";
+import { StyleSheet, TextStyle, ViewStyle, Dimensions } from "react-native";
 
 
 export const homeStyles = (colors: ThemeColors) => {
 
-    const baseItem: TextStyle = {
+    const baseItem: ViewStyle = {
         paddingHorizontal: 20,
         paddingVertical: 15,
-        color: 'white',
         borderRadius: 10,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+
+    const baseText: TextStyle = {
         fontFamily: 'WorkSans-Regular',
         fontSize: 16,
+        color: colors.text
+    }
+
+    const baseButton: ViewStyle = {
+        padding: 5,
+        borderRadius: 5,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 
     return StyleSheet.create({
+
+        // Home Page Styles
+
         homeContainer: {
             display: 'flex',
             flexDirection: 'column',
-            gap: 20,
+            gap: 10,
             paddingVertical: 10,
-            // paddingHorizontal: 5
+        },
+        headerContainer: {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 5
         },
         headerText: {
             fontSize: 30,
@@ -27,61 +50,112 @@ export const homeStyles = (colors: ThemeColors) => {
             fontFamily: 'WorkSans-Bold'
         },
 
+        // Category Componenet Styles
+
         categoryContainer: {
             display: 'flex',
             flexDirection: 'row',
             gap: 10,
-            paddingHorizontal: 5
         },
 
         category: {
-            flex: 1
-        },
+            flex: 1,
+            paddingVertical: 5,
+            paddingHorizontal: 5,
 
+        },
         flatlistGap: {
-            gap: 10
+            gap: 10,
+        },
+        addButtonContainer: {
+            paddingVertical: 5,
+        },
+        addButton: {
+            ...baseItem,
+            backgroundColor: colors.primary,
         },
 
-        addButton: {
-            paddingHorizontal: 20,
-            paddingVertical: 15,
-            borderRadius: 10,
+        selectedCatButton: {
+            ...baseItem,
+            backgroundColor: colors.primary
+        },
+
+        notSelectedCatButton: {
+            ...baseItem,
+            backgroundColor: colors.tabbackground,
+            elevation: 5
+
+        },
+
+        selectedButtonText: {
+            ...baseText,
+            color: 'white'
+        },
+
+        notSelectedButtonText: {
+            ...baseText
+        },
+
+        // Card Component Styles
+
+        cardContainer: {
+            display: 'flex',
+            gap: 10,
+        },
+
+        cardHeader: {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 5
+        },
+
+        categoryName: {
+            color: colors.text,
+            fontFamily: 'WorkSans-Regular',
+            fontSize: 18
+        },
+
+        editCategoryButton: {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#1A80E5',
+            paddingVertical: 10,
+            paddingHorizontal: 20,
+            backgroundColor: '#E2EAFF',
+            borderRadius: 10
         },
 
-
-        selectedItem: {
-            ...baseItem,
-            backgroundColor: '#1A80E5',
-        },
-
-        notSelectedItem: {
-            ...baseItem,
-            backgroundColor: 'gray',
+        editCategoryText: {
+            ...baseText,
+            color: colors.primary
         },
 
         card: {
             display: 'flex',
             flexDirection: 'column',
             gap: 20,
-            paddingBottom: 150,
-            paddingHorizontal: 5
+            paddingHorizontal: 5,
+            paddingTop: 5,
+            paddingBottom: 350
         },
 
         linkCard: {
             paddingHorizontal: 20,
             paddingVertical: 30,
             backgroundColor: colors.tabbackground,
-            elevation: 10,
+            elevation: 5,
             borderRadius: 15,
             display: 'flex',
             flexDirection: 'column',
             gap: 10,
         },
-
+        crudContainer: {
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        },
         linkCategory: {
             color: '#719d4e',
             backgroundColor: '#dce9f5',
@@ -92,40 +166,27 @@ export const homeStyles = (colors: ThemeColors) => {
             fontFamily: 'WorkSans-Regular',
             fontSize: 15
         },
-        crudContainer: {
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between'
-        },
 
         crudIconContainer: {
             display: 'flex',
             flexDirection: 'row',
-            gap: 10
+            gap: 10,
         },
 
         deleteIcon: {
-            padding: 5,
-            borderRadius: 5,
-            backgroundColor: '#dce9f5',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
+            ...baseButton,
+            backgroundColor: '#FFE5E4',
         },
 
-        editIcon: {
-            display: 'flex',
+        icon: {
+            ...baseButton,
             flexDirection: 'row',
             gap: 5,
-            padding: 5,
-            backgroundColor: '#dce9f5',
-            borderRadius: 5,
-            justifyContent: 'center',
-            alignItems: 'center'
+            backgroundColor: '#E2EAFF',
         },
 
         editText: {
-            color: '#2556bd',
+            color: colors.primary,
             fontFamily: 'WorkSans-Regular'
         },
 
@@ -143,19 +204,20 @@ export const homeStyles = (colors: ThemeColors) => {
             gap: 30
         },
 
-        linkContainer: {
+        actionSeparator: {
             display: 'flex',
             flexDirection: 'row',
-            gap: 20,
-            overflow: 'hidden'
+            gap: 10,
+            justifyContent: 'center',
+            alignItems: 'center'
         },
-
+        linkContainer: {
+            maxWidth: Dimensions.get('window').width * 0.5,
+        },
         link: {
-            flex: 1,
-            overflow: 'hidden',
-            color: colors.text,
+            color: colors.primary,
             fontFamily: 'WorkSans-Regular',
-            fontSize: 14
+            fontSize: 15,
         }
     })
 }

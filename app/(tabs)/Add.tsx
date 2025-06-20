@@ -1,10 +1,12 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React from 'react';
+import { Text, View } from 'react-native';
 
-const Add = () => {
+const Add: React.FunctionComponent = () => {
+
     return (
         <View>
             <Text>Add</Text>
+
         </View>
     )
 }

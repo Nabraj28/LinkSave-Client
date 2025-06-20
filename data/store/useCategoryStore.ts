@@ -1,4 +1,4 @@
-import { CategoryResponse } from '@/types'
+import { CategoryResponse } from '@/data/types'
 import { create } from 'zustand'
 
 interface CategoryStoreTypes {

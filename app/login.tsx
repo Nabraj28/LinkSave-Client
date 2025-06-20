@@ -1,5 +1,5 @@
-import { useTheme } from '@/hooks/useTheme';
-import { LoginModel, LoginSchema } from '@/models/LoginModel';
+import { useTheme } from '@/data/hooks/useTheme';
+import { LoginModel, LoginSchema } from '@/data/models/LoginModel';
 import authStyles from '@/styles/authStyles';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Link, useRouter } from 'expo-router';
