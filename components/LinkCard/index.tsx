@@ -1,19 +1,32 @@
 import { View, Text, Dimensions, TouchableOpacity, Linking, Share } from 'react-native'
 import React from 'react'
 import AppSkeleton from '../Skeleton'
-import { Link, LinkCardProps } from '@/data/types';
 import Toast from 'react-native-toast-message';
 import { useTheme } from '@/data/hooks/useTheme';
 import { homeStyles } from '@/styles/homeStyles';
 import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
 import Entypo from '@expo/vector-icons/Entypo';
+import { Link } from '@/data/types';
+import useDeleteLinkStore from '@/data/store/useLinkStore';
+
+
+export interface LinkCardProps {
+    item: Link | number;
+    getCategoryName: (item: Link) => React.ReactNode;
+}
 
 
 const LinkCard = ({ item, getCategoryName }: LinkCardProps) => {
 
-    const { colors } = useTheme();
-    const styles = homeStyles(colors)
+    const { colors, theme } = useTheme();
+    const styles = homeStyles(colors, theme);
+    const {toggleModalDeleteLink, setLinkId} = useDeleteLinkStore();
+
+    const handldDeletePress =(linkId: string)=>{
+        toggleModalDeleteLink();
+        setLinkId(linkId);
+    }
 
     const cardWidth = Math.floor(Dimensions.get('window').width - 30);
 
@@ -55,7 +68,6 @@ const LinkCard = ({ item, getCategoryName }: LinkCardProps) => {
     };
 
 
-
     return (
         <React.Fragment>
             {
@@ -68,7 +80,7 @@ const LinkCard = ({ item, getCategoryName }: LinkCardProps) => {
                                 {getCategoryName(item)}
                             </Text>
                             <View style={styles.crudIconContainer}>
-                                <TouchableOpacity style={styles.deleteIcon}>
+                                <TouchableOpacity onPress={()=>handldDeletePress(item._id)} style={styles.deleteIcon}>
                                     <Feather name="trash" size={15} color={colors.danger} />
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.icon}>
@@ -77,7 +89,7 @@ const LinkCard = ({ item, getCategoryName }: LinkCardProps) => {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <Text style={styles.title}>{item.title}</Text>
+                        <Text numberOfLines={1} style={styles.title}>{item.title}</Text>
                         <View style={styles.actionContainer}>
                             <View style={styles.actionSeparator}>
                                 <View style={styles.icon}>

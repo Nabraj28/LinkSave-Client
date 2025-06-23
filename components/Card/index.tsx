@@ -6,19 +6,17 @@ import useCategoryStore from '@/data/store/useCategoryStore';
 import { Link, LinkSaveResponse } from '@/data/types';
 import LinkCard from '../LinkCard';
 
-
 interface CardProps {
     isLoading: boolean;
     data?: LinkSaveResponse;
-    toggleEditModal?: () => void
 }
 
-const Card = ({ isLoading, data, toggleEditModal }: CardProps) => {
+const Card = ({ isLoading, data }: CardProps) => {
 
     const { colors } = useTheme();
     const styles = homeStyles(colors);
 
-    const { selectedCategory } = useCategoryStore();
+    const { selectedCategory, toggleModalEditCategory } = useCategoryStore();
 
     const skeletonData = [1, 2, 3, 4];
 
@@ -35,7 +33,7 @@ const Card = ({ isLoading, data, toggleEditModal }: CardProps) => {
     };
 
     const renderItem = ({ item }: { item: Link | number }) => (
-        <LinkCard item={item} getCategoryName={getCategoryName} />
+        <LinkCard  item={item} getCategoryName={getCategoryName} />
     );
 
 
@@ -45,7 +43,7 @@ const Card = ({ isLoading, data, toggleEditModal }: CardProps) => {
                 <View style={styles.cardHeader}>
                     <Text style={styles.categoryName}>{selectedCategory?.name}</Text>
                     {selectedCategory?.name === 'All' ? null :
-                        <TouchableOpacity style={styles.editCategoryButton} onPress={toggleEditModal}>
+                        <TouchableOpacity style={styles.editCategoryButton} onPress={toggleModalEditCategory}>
                             <Text style={styles.editCategoryText}>Edit Category</Text>
                         </TouchableOpacity>
                     }

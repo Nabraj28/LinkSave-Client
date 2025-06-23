@@ -54,7 +54,6 @@ export interface User {
 export interface CategoryProps {
     isLoading: boolean;
     data?: LinkSaveResponse;
-    toggleAddModal?: () => void;
     selectedCategory?: CategoryResponse | null
     onSelect?: (item: CategoryResponse) => void
 }
@@ -86,16 +85,18 @@ export type ThemeName = 'light' | 'dark';
 export interface ThemeColors {
     background: string;
     tabbackground: string;
+    buttonBackground: string;
     text: string;
+    input?: string;
+    placeholder: string;
+    card: string;
+    danger: string
     subheader?: string;
     activeIcon: string;
     inactiveIcon: string;
     primary: string;
     secondary: string;
     border: string;
-    input?: string;
-    card: string;
-    danger: string
 }
 
 export interface Theme {
@@ -103,14 +104,57 @@ export interface Theme {
     colors: ThemeColors;
 }
 
-export interface LinkCardProps {
-    item: Link | number;
-    getCategoryName: (item: Link) => React.ReactNode;
-}
-
 export interface UpsertModalProps {
     title: string;
     visible: boolean;
     onClose: () => void;
     children: React.ReactNode
+}
+
+export interface DeleteLinkResponse {
+    success: boolean,
+    message: string,
+    deletedLink: Link
+}
+
+export interface DeleteCategoryResponse {
+    success: boolean,
+    message: string,
+    deletedCategory: CategoryResponse
+}
+
+export interface AddCategoryResponse {
+    success: boolean,
+    message: string,
+    category: CategoryResponse
+}
+
+export interface DeleteModalProps {
+    item: string,
+    isVisible: boolean,
+    onModalClose: () => void,
+    onDelete: () => void;
+    pending: boolean
+}
+
+interface UpdateCategoryRequest {
+    name: string,
+}
+
+interface AddCategoryRequest {
+    name: string
+}
+
+export interface AddCategoryPayload {
+    payload: AddCategoryPayload
+}
+export interface UpdateCategoryPayload {
+    categoryId?: string,
+    payload: UpdateCategoryRequest
+}
+
+export interface UpdateCategoryResponse {
+    success: boolean,
+    message: string,
+    category: CategoryResponse
 }

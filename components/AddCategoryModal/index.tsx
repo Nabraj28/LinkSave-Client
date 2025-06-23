@@ -6,26 +6,49 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CategoryModel, CategorySchema } from '@/data/models/CategoryModel';
 import upsertModalStyles from '@/styles/upsertStyles';
 import GenericModal from '../GenericModal';
+import useCategoryStore from '@/data/store/useCategoryStore';
+import useAddCategory from '@/data/hooks/Category/useAddCategory';
+import Toast from 'react-native-toast-message';
 
-const AddCategoryModal = ({ isVisible, toggleAddModal }: { isVisible: boolean, toggleAddModal: () => void }) => {
+const AddCategoryModal = () => {
 
-    const { colors } = useTheme()
-    const styles = upsertModalStyles(colors);
+    const { colors, theme } = useTheme()
+    const styles = upsertModalStyles(colors, theme);
 
-    const { control, formState: { errors }, handleSubmit } = useForm({
+    const { control, formState: { errors }, handleSubmit, reset } = useForm({
         resolver: zodResolver(CategorySchema)
-    })
+    });
+    const {modalAddCategory, toggleModalAddCategory} = useCategoryStore();
+
+    const {mutate, isPending} = useAddCategory({
+        cb:()=>{},
+        cbSuccess:()=>{
+            Toast.show({
+                type:'success',
+                text1:'Category Added Successfully'
+            });
+            toggleModalAddCategory();
+            reset();
+        },
+        cbError:()=>{
+            Toast.show({
+                type:'error',
+                text1:'Error While Adding Category'
+            })
+        }
+    });
 
     const handleCloseModal = () => {
-        toggleAddModal()
+        toggleModalAddCategory();
+        reset();
     };
 
     const onSubmit = (data: CategoryModel) => {
-        console.log(data)
+        mutate(data)
     }
 
     return (
-        <GenericModal title='Add Category' onClose={handleCloseModal} visible={isVisible}>
+        <GenericModal title='Add Category' onClose={handleCloseModal} visible={modalAddCategory}>
             <View style={styles.inputContainer}>
                 <View>
                     <Text style={styles.label}>Category Name</Text>
@@ -39,6 +62,7 @@ const AddCategoryModal = ({ isVisible, toggleAddModal }: { isVisible: boolean, t
                                 onChangeText={onChange}
                                 placeholder='Enter Category Name'
                                 style={styles.nameInput}
+                                placeholderTextColor={colors.placeholder}
                             />
                         )}
                     />
@@ -50,8 +74,10 @@ const AddCategoryModal = ({ isVisible, toggleAddModal }: { isVisible: boolean, t
                 </View>
             </View>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.upsertButton} onPress={handleSubmit(onSubmit)}>
-                    <Text style={styles.label}>Add</Text>
+                <TouchableOpacity disabled={isPending} style={styles.upsertButton} onPress={handleSubmit(onSubmit)}>
+                    <Text style={styles.buttonText}>
+                        {isPending ? "Adding..." : "Add"}
+                    </Text>
                 </TouchableOpacity>
             </View>
         </GenericModal>

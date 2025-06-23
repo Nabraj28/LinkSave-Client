@@ -2,7 +2,7 @@ import { ThemeColors } from "@/data/types";
 import { StyleSheet, TextStyle, ViewStyle, Dimensions } from "react-native";
 
 
-export const homeStyles = (colors: ThemeColors) => {
+export const homeStyles = (colors: ThemeColors, theme?: string) => {
 
     const baseItem: ViewStyle = {
         paddingHorizontal: 20,
@@ -36,6 +36,7 @@ export const homeStyles = (colors: ThemeColors) => {
             flexDirection: 'column',
             gap: 10,
             paddingVertical: 10,
+            backgroundColor: colors.background
         },
         headerContainer: {
             display: 'flex',
@@ -82,7 +83,7 @@ export const homeStyles = (colors: ThemeColors) => {
 
         notSelectedCatButton: {
             ...baseItem,
-            backgroundColor: colors.tabbackground,
+            backgroundColor: theme === 'light' ? 'white' : colors.buttonBackground,
             elevation: 5
 
         },
@@ -144,7 +145,7 @@ export const homeStyles = (colors: ThemeColors) => {
         linkCard: {
             paddingHorizontal: 20,
             paddingVertical: 30,
-            backgroundColor: colors.tabbackground,
+            backgroundColor: colors.card,
             elevation: 5,
             borderRadius: 15,
             display: 'flex',
@@ -158,7 +159,7 @@ export const homeStyles = (colors: ThemeColors) => {
         },
         linkCategory: {
             color: '#719d4e',
-            backgroundColor: '#dce9f5',
+            backgroundColor: `${theme === 'light' ? '#dce9f5' : colors.buttonBackground}`,
             paddingHorizontal: 10,
             paddingVertical: 5,
             alignSelf: 'flex-start',
@@ -175,14 +176,14 @@ export const homeStyles = (colors: ThemeColors) => {
 
         deleteIcon: {
             ...baseButton,
-            backgroundColor: '#FFE5E4',
+            backgroundColor: `${theme === 'light' ? '#FFE5E4' : colors.buttonBackground}`,
         },
 
         icon: {
             ...baseButton,
             flexDirection: 'row',
             gap: 5,
-            backgroundColor: '#E2EAFF',
+            backgroundColor: colors.buttonBackground,
         },
 
         editText: {
@@ -191,6 +192,7 @@ export const homeStyles = (colors: ThemeColors) => {
         },
 
         title: {
+            maxWidth: '80%',
             color: colors.text,
             fontSize: 20,
             fontFamily: 'WorkSans-Regular'

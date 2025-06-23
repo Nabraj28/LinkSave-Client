@@ -8,8 +8,8 @@ import { UpsertModalProps } from '@/data/types';
 
 const GenericModal = ({ title, visible, onClose, children }: UpsertModalProps) => {
 
-    const { colors } = useTheme();
-    const styles = upsertModalStyles(colors);
+    const { colors, theme } = useTheme();
+    const styles = upsertModalStyles(colors, theme);
 
     return (
         <Modal transparent animationType='fade' visible={visible} onRequestClose={onClose}>

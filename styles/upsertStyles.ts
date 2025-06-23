@@ -1,7 +1,8 @@
 import { ThemeColors } from "@/data/types"
 import { StyleSheet, TextStyle, ViewStyle } from "react-native"
 
-const upsertModalStyles = (colors: ThemeColors) => {
+const upsertModalStyles = (colors: ThemeColors, theme?: string) => {
+
     const baseText: TextStyle = {
         fontFamily: 'WorkSans-Regular',
         fontSize: 16,
@@ -26,7 +27,8 @@ const upsertModalStyles = (colors: ThemeColors) => {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'rgba(1,1,1,0.5)'
+            backgroundColor: `${theme === 'light' ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.8)'}`
+
         },
         content: {
             ...baseContainer,
@@ -34,8 +36,9 @@ const upsertModalStyles = (colors: ThemeColors) => {
             flexDirection: 'column',
             gap: 20,
             borderRadius: 10,
-            backgroundColor: '#232023',
-            padding: 20
+            backgroundColor: colors.card,
+            padding: 20,
+            elevation: 10
         },
         headerContainer: {
             ...baseContainer,
@@ -51,8 +54,8 @@ const upsertModalStyles = (colors: ThemeColors) => {
         },
         closeIcon: {
             padding: 5,
-            backgroundColor: colors.tabbackground,
-            borderRadius: 10
+            backgroundColor: colors.buttonBackground,
+            borderRadius: 10,
         },
         inputContainer: {
             ...baseContainer,
@@ -64,9 +67,9 @@ const upsertModalStyles = (colors: ThemeColors) => {
         },
         nameInput: {
             ...baseText,
-            backgroundColor: colors.tabbackground,
+            backgroundColor: colors.input,
             borderRadius: 10,
-            paddingLeft: 10
+            paddingLeft: 10,
         },
         errorText: {
             ...baseText,
@@ -87,7 +90,7 @@ const upsertModalStyles = (colors: ThemeColors) => {
         },
         deleteButton: {
             ...baseButton,
-            backgroundColor: colors.danger
+            backgroundColor: 'red'
         }
     })
 }

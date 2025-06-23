@@ -8,10 +8,10 @@ import useCategoryStore from '@/data/store/useCategoryStore';
 import AppSkeleton from '../Skeleton';
 
 
-const Category = ({ isLoading, data, toggleAddModal }: CategoryProps) => {
+const Category = ({ isLoading, data }: CategoryProps) => {
 
-    const { colors } = useTheme();
-    const styles = homeStyles(colors);
+    const { colors, theme } = useTheme();
+    const styles = homeStyles(colors, theme);
     const skeletonData = [1, 2, 3, 4];
 
     const categories = data?.user.categories || []
@@ -21,7 +21,7 @@ const Category = ({ isLoading, data, toggleAddModal }: CategoryProps) => {
         return [{ _id: 'all', name: 'All', links: allLinks }, ...categories];
     }, [categories]);
 
-    const { selectedCategory, setSelectedCategory } = useCategoryStore();
+    const { selectedCategory, setSelectedCategory, toggleModalAddCategory } = useCategoryStore();
 
     useEffect(() => {
         if (!isLoading && extendedData.length > 0) {
@@ -63,7 +63,7 @@ const Category = ({ isLoading, data, toggleAddModal }: CategoryProps) => {
                 contentContainerStyle={styles.flatlistGap}
             />
             <View style={styles.addButtonContainer}>
-                <TouchableOpacity disabled={isLoading} onPress={toggleAddModal} style={styles.addButton}>
+                <TouchableOpacity disabled={isLoading} onPress={toggleModalAddCategory} style={styles.addButton}>
                     <AntDesign name="plus" size={24} color="white" />
                 </TouchableOpacity>
             </View>
