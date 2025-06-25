@@ -1,11 +1,10 @@
 import { Tabs } from "expo-router";
 import tabStyles from "@/styles/tabStyles";
-import { useTheme } from "@/data/hooks/useTheme";
-import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { HomeIcon } from "@/assets/icons/HomeIcon";
 import { SettingsIcon } from "@/assets/icons/SettingsIcon";
 import { AddIcon } from "@/assets/icons/AddIcon";
+import { useTheme } from "@/data/hooks/Theme/useTheme";
 
 
 const Layout: React.FunctionComponent = () => {

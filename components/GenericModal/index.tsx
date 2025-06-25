@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Modal, Pressable, TouchableOpacity } from 'react-native'
-import { useTheme } from '@/data/hooks/useTheme';
+import { useTheme } from '@/data/hooks/Theme/useTheme';
 import { AntDesign } from '@expo/vector-icons';
 import upsertModalStyles from '../../styles/upsertStyles';
 import { UpsertModalProps } from '@/data/types';

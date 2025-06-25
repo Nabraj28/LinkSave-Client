@@ -1,4 +1,5 @@
-import { useTheme } from '@/data/hooks/useTheme';
+
+import { useTheme } from '@/data/hooks/Theme/useTheme';
 import welcomeStyles from '@/styles/welcomeStyles';
 import { useRouter } from 'expo-router';
 import React from 'react';

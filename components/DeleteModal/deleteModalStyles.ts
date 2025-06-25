@@ -1,4 +1,4 @@
-import { useTheme } from "@/data/hooks/useTheme";
+import { useTheme } from "@/data/hooks/Theme/useTheme";
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 
 const deleteModalStyles = () => {

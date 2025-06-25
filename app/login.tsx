@@ -1,4 +1,4 @@
-import { useTheme } from '@/data/hooks/useTheme';
+
 import { LoginModel, LoginSchema } from '@/data/models/LoginModel';
 import authStyles from '@/styles/authStyles';
 import Entypo from '@expo/vector-icons/Entypo';
@@ -8,6 +8,7 @@ import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '@/context/AuthContext';
+import { useTheme } from '@/data/hooks/Theme/useTheme';
 
 const Login = () => {
     const router = useRouter();

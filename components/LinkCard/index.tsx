@@ -2,13 +2,13 @@ import { View, Text, Dimensions, TouchableOpacity, Linking, Share } from 'react-
 import React from 'react'
 import AppSkeleton from '../Skeleton'
 import Toast from 'react-native-toast-message';
-import { useTheme } from '@/data/hooks/useTheme';
+import { useTheme } from '@/data/hooks/Theme/useTheme';
 import { homeStyles } from '@/styles/homeStyles';
 import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Link } from '@/data/types';
-import useDeleteLinkStore from '@/data/store/useLinkStore';
+import useLinkStore from '@/data/store/useLinkStore';
 
 
 export interface LinkCardProps {
@@ -19,9 +19,9 @@ export interface LinkCardProps {
 
 const LinkCard = ({ item, getCategoryName }: LinkCardProps) => {
 
-    const { colors, theme } = useTheme();
-    const styles = homeStyles(colors, theme);
-    const {toggleModalDeleteLink, setLinkId} = useDeleteLinkStore();
+    const { colors } = useTheme();
+    const styles = homeStyles();
+    const {toggleModalDeleteLink, setLinkId, setSelectedLink, toggleModalEditLink, selectedLink} = useLinkStore();
 
     const handldDeletePress =(linkId: string)=>{
         toggleModalDeleteLink();
@@ -67,6 +67,12 @@ const LinkCard = ({ item, getCategoryName }: LinkCardProps) => {
         }
     };
 
+    const handleEditLink =(item: Link)=>{
+        setSelectedLink(item);
+        toggleModalEditLink();
+    };
+
+
 
     return (
         <React.Fragment>
@@ -83,7 +89,7 @@ const LinkCard = ({ item, getCategoryName }: LinkCardProps) => {
                                 <TouchableOpacity onPress={()=>handldDeletePress(item._id)} style={styles.deleteIcon}>
                                     <Feather name="trash" size={15} color={colors.danger} />
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.icon}>
+                                <TouchableOpacity onPress={()=>handleEditLink(item)} style={styles.icon}>
                                     <Feather name="edit" size={15} color={colors.primary} />
                                     <Text style={styles.editText}>Edit</Text>
                                 </TouchableOpacity>

@@ -1,20 +1,17 @@
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import React from 'react';
-import { useTheme } from '@/data/hooks/useTheme';
 import { homeStyles } from '@/styles/homeStyles';
 import useCategoryStore from '@/data/store/useCategoryStore';
-import { Link, LinkSaveResponse } from '@/data/types';
+import { Link } from '@/data/types';
 import LinkCard from '../LinkCard';
+import useGetUserData from '@/data/hooks/User/useGetUserData';
 
-interface CardProps {
-    isLoading: boolean;
-    data?: LinkSaveResponse;
-}
 
-const Card = ({ isLoading, data }: CardProps) => {
+const Card = () => {
 
-    const { colors } = useTheme();
-    const styles = homeStyles(colors);
+    const styles = homeStyles();
+
+    const { data, isLoading } = useGetUserData();
 
     const { selectedCategory, toggleModalEditCategory } = useCategoryStore();
 

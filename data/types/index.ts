@@ -50,13 +50,6 @@ export interface User {
     email: string,
     categories: CategoryResponse[]
 }
-
-export interface CategoryProps {
-    isLoading: boolean;
-    data?: LinkSaveResponse;
-    selectedCategory?: CategoryResponse | null
-    onSelect?: (item: CategoryResponse) => void
-}
 export interface CategoryResponse {
     _id?: string,
     name: string,
@@ -90,7 +83,8 @@ export interface ThemeColors {
     input?: string;
     placeholder: string;
     card: string;
-    danger: string
+    danger: string;
+    themeIcon: string;
     subheader?: string;
     activeIcon: string;
     inactiveIcon: string;
@@ -141,12 +135,8 @@ interface UpdateCategoryRequest {
     name: string,
 }
 
-interface AddCategoryRequest {
+export interface AddCategoryRequest {
     name: string
-}
-
-export interface AddCategoryPayload {
-    payload: AddCategoryPayload
 }
 export interface UpdateCategoryPayload {
     categoryId?: string,
@@ -157,4 +147,29 @@ export interface UpdateCategoryResponse {
     success: boolean,
     message: string,
     category: CategoryResponse
+}
+
+interface LinkPayload {
+    title: string,
+    url: string
+}
+export interface UpdateLinkRequest {
+    linkId?: string;
+    payload: LinkPayload
+}
+
+export interface UpdateLinkResponse {
+    success: boolean;
+    message: string;
+    link: Link
+}
+
+export interface AddLinkRequest {
+    categoryId?: string;
+    payload: LinkPayload
+}
+export interface AddLinkResponse {
+    success: boolean;
+    message: string;
+    link: Link
 }

@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { Skeleton } from "moti/skeleton";
 import { View } from "react-native";
-import { useTheme } from "@/data/hooks/useTheme";
+import { useTheme } from "@/data/hooks/Theme/useTheme";
 
 interface SkeletonProps {
     width: number,

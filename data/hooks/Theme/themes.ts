@@ -9,11 +9,12 @@ export const themes = {
         danger: '#D0312D',
         input: '#ECECEC',
         placeholder: '#868482',
+        border: '#C2C2C2',
+        themeIcon: '#5D616A',
         subheader: '',
         activeIcon: '#000',
         inactiveIcon: '#999',
         secondary: '#5856D6',
-        border: '#E5E5EA',
     },
     dark: {
         background: '#121212',
@@ -25,14 +26,17 @@ export const themes = {
         danger: '#D0312D',
         input: '#242424',
         placeholder: '#6E6A69',
+        border: '#343831',
+        themeIcon: '#CAD1D9',
         subheader: '#a4a4a6',
         activeIcon: '#FFFFFF',
         inactiveIcon: '#FDFCFA',
         secondary: '#5E5CE6',
-        border: '#979797',
     },
 };
 
 // 242424 - input
 // 191919 - modal / linkcard
 // 2e2e2c - cancel btn
+
+// themeIcon dark cad1d9 light 5d616a

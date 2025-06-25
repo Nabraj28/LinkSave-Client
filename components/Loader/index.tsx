@@ -1,4 +1,4 @@
-import { useTheme } from '@/data/hooks/useTheme';
+import { useTheme } from '@/data/hooks/Theme/useTheme';
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 

@@ -7,8 +7,6 @@ import { Stack } from "expo-router";
 import React from "react";
 import Toast from "react-native-toast-message";
 import { useFonts, WorkSans_700Bold, WorkSans_400Regular } from '@expo-google-fonts/work-sans';
-import { Provider } from 'react-redux'
-// import store from "@/data/store";
 
 const client = new QueryClient();
 
@@ -50,10 +48,8 @@ export default function RootLayout() {
     <QueryClientProvider client={client}>
       <AuthProvider>
         <ThemeProvider>
-          {/* <Provider store={store}> */}
           <AuthGate />
           <Toast config={toastConfig} />
-          {/* </Provider> */}
         </ThemeProvider>
       </AuthProvider>
     </QueryClientProvider>

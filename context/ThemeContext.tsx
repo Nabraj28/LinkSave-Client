@@ -4,7 +4,7 @@ import { useColorScheme } from 'react-native';
 
 export const ThemeContext = createContext({
     theme: 'light',
-    toggleTheme: () => { },
+    toggleTheme: (theme: string) => { },
 });
 
 const THEME_STORAGE_KEY = '@app_theme';
@@ -34,11 +34,10 @@ export const ThemeProvider: React.FunctionComponent<ThemeProviderProps> = ({ chi
         loadSavedTheme();
     }, []);
 
-    const toggleTheme = async () => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
+    const toggleTheme = async (theme: string) => {
+        setTheme(theme);
         try {
-            await AsyncStorage.setItem(THEME_STORAGE_KEY, newTheme);
+            await AsyncStorage.setItem(THEME_STORAGE_KEY, theme);
         } catch (error) {
             console.error('Failed to save theme:', error);
         }

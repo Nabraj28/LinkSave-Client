@@ -1,8 +1,11 @@
+import { useTheme } from "@/data/hooks/Theme/useTheme";
 import { ThemeColors } from "@/data/types";
 import { StyleSheet, TextStyle, ViewStyle, Dimensions } from "react-native";
 
 
-export const homeStyles = (colors: ThemeColors, theme?: string) => {
+export const homeStyles = () => {
+
+    const { colors, theme } = useTheme();
 
     const baseItem: ViewStyle = {
         paddingHorizontal: 20,

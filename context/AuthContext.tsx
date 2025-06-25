@@ -1,5 +1,5 @@
-import useLogin from "@/data/hooks/useLogin";
-import useRegister from "@/data/hooks/useRegister";
+import useLogin from "@/data/hooks/User/useLogin";
+import useRegister from "@/data/hooks/User/useRegister";
 import { AuthContextType, AuthState, LoginRequest, RegisterRequest } from "@/data/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useEffect, useState } from "react";
