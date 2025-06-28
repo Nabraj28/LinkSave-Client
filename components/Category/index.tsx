@@ -49,6 +49,7 @@ const Category = () => {
         )
     }
 
+
     return (
         <View style={styles.categoryContainer}>
             <FlatList

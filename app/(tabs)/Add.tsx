@@ -4,39 +4,41 @@ import useGetUserData from '@/data/hooks/User/useGetUserData';
 import { LinkModel, LinkSchema } from '@/data/models/LinkModel';
 import addStyles from '@/styles/addStyles';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-toast-message';
-import { Dropdown } from 'react-native-element-dropdown';
 import useCategoryStore from '@/data/store/useCategoryStore';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const Add: React.FunctionComponent = () => {
 
     const { colors } = useTheme();
     const styles = addStyles();
 
-    const { data, isLoading } = useGetUserData();
-    const categories = data?.user.categories || [];
+    const [open, setOpen] = useState(false);
 
-    const {selectedCategory, setSelectedCategory} = useCategoryStore();
+    const { data } = useGetUserData();
+    const categories = data?.user.categories;
+
+    const { selectedCategory, setSelectedCategory } = useCategoryStore();
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({
         resolver: zodResolver(LinkSchema)
     });
 
-    const {mutate, isPending} = useAddLink({
-        cb:()=>{},
-        cbSuccess:()=>{
+    const { mutate, isPending } = useAddLink({
+        cb: () => { },
+        cbSuccess: () => {
             Toast.show({
-                type:'success',
+                type: 'success',
                 text1: 'Link Added Successfully'
             });
             reset();
         },
-        cbError:(error)=>{
+        cbError: (error) => {
             Toast.show({
-                type:'error',
+                type: 'error',
                 text1: `Error: ${error.message}`
             })
         }
@@ -47,7 +49,8 @@ const Add: React.FunctionComponent = () => {
             categoryId: selectedCategory?._id,
             payload: data
         })
-    }
+    };
+
 
     return (
         <View style={styles.addContainer}>
@@ -98,19 +101,30 @@ const Add: React.FunctionComponent = () => {
             </View>
             <View>
                 <Text style={styles.label}>Select Category</Text>
-                <Dropdown
-                    search={false}
-                    value={selectedCategory}
-                    data={categories}
-                    labelField='name'
-                    valueField='name'
-                    placeholder='Select Category'
-                    style={styles.dropDown}
-                    placeholderStyle={styles.placeHolder}
-                    minHeight={200}
-                    containerStyle={styles.option}
-                    itemContainerStyle={styles.optionItem}
-                    onChange={(item) => setSelectedCategory(item)}
+                <DropDownPicker
+                    open={open}
+                    setOpen={setOpen}
+                    value={selectedCategory?._id || null}
+                    setValue={(callback) => {
+                        const value = callback(selectedCategory?._id || null);
+                        const selected = categories?.find(cat => cat._id === value);
+                        setSelectedCategory(selected || null);
+                    }}
+                    items={categories?.map(category => ({
+                        label: category.name,
+                        value: category._id
+                    })) || []}
+                    placeholder="Select Category"
+                    placeholderStyle={[styles.placeHolder, { color: colors.placeholder }]}
+                    style={[styles.dropDown, { backgroundColor: colors.input }]}
+                    dropDownContainerStyle={[styles.dropDown, { backgroundColor: colors.input }]}
+                    textStyle={{ color: colors.text }}
+                    listItemLabelStyle={{ color: colors.text }}
+                    onChangeValue={() => {
+                    }}
+                    zIndex={3000}
+                    zIndexInverse={1000}
+                    listMode="SCROLLVIEW"
                 />
             </View>
             <TouchableOpacity disabled={isPending} style={styles.addButton} onPress={handleSubmit(onSubmit)}>

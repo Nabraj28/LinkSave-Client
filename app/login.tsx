@@ -4,11 +4,12 @@ import authStyles from '@/styles/authStyles';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Link, useRouter } from 'expo-router';
 import React from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '@/context/AuthContext';
 import { useTheme } from '@/data/hooks/Theme/useTheme';
+import Toast from "react-native-toast-message";
 
 const Login = () => {
     const router = useRouter();
@@ -30,7 +31,10 @@ const Login = () => {
         try {
             await login(data)
         } catch (error) {
-            Alert.alert('Login failed')
+            Toast.show({
+                type:'error',
+                text1: `Login failed: ${error}`,
+            })
         }
     };
 
@@ -92,7 +96,7 @@ const Login = () => {
                     </View>
                 </View>
                 <Text style={styles.footerText}>
-                    Don't have an account?
+                    Don&apos;t have an account?
                     <Link style={styles.linkText} href={'/register'}>
                         Register
                     </Link>

@@ -64,7 +64,8 @@ const addStyles = () => {
             paddingVertical: 15,
             backgroundColor: colors.input,
             borderRadius: 10,
-            paddingHorizontal: 10
+            paddingHorizontal: 10,
+
         },
         option: {
             paddingVertical: 10,
