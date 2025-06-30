@@ -65,7 +65,17 @@ const addStyles = () => {
             backgroundColor: colors.input,
             borderRadius: 10,
             paddingHorizontal: 10,
+            borderWidth: 0
 
+        },
+
+        dropDownOptions: {
+            paddingVertical: 15,
+            backgroundColor: colors.input,
+            borderRadius: 10,
+            paddingHorizontal: 10,
+            marginTop: 10,
+            borderWidth: 0
         },
         option: {
             paddingVertical: 10,

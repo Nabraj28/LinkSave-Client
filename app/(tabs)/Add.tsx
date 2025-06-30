@@ -115,11 +115,11 @@ const Add: React.FunctionComponent = () => {
                         value: category._id
                     })) || []}
                     placeholder="Select Category"
-                    placeholderStyle={[styles.placeHolder, { color: colors.placeholder }]}
-                    style={[styles.dropDown, { backgroundColor: colors.input }]}
-                    dropDownContainerStyle={[styles.dropDown, { backgroundColor: colors.input }]}
-                    textStyle={{ color: colors.text }}
-                    listItemLabelStyle={{ color: colors.text }}
+                    placeholderStyle={styles.placeHolder}
+                    style={styles.dropDown}
+                    dropDownContainerStyle={styles.dropDownOptions}
+                    textStyle={styles.label}
+                    listItemLabelStyle={styles.label}
                     onChangeValue={() => {
                     }}
                     zIndex={3000}
