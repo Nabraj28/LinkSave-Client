@@ -1,8 +1,8 @@
-import { ThemeColors } from "@/data/types";
+import { useTheme } from "@/data/hooks/Theme/useTheme";
 import { StatusBar, StyleSheet, Dimensions } from "react-native";
 
 
-const tabStyles = (colors: ThemeColors) => {
+const tabStyles = () => {
 
     const screenHeight = Dimensions.get('screen').height;
     const windowowHeight = Dimensions.get('window').height;
@@ -10,6 +10,8 @@ const tabStyles = (colors: ThemeColors) => {
     const isButtonNavigation = screenHeight - windowowHeight > 0;
     const StatusBarHeight = StatusBar.currentHeight || 24;
     const buttonNavHeight = screenHeight - windowowHeight - StatusBarHeight;
+
+    const { colors } = useTheme();
 
     return StyleSheet.create({
 

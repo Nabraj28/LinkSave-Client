@@ -1,29 +1,25 @@
-import { View, Text, Dimensions, TouchableOpacity, Linking, Share } from 'react-native'
 import React from 'react'
-import AppSkeleton from '../Skeleton'
-import Toast from 'react-native-toast-message';
-import { useTheme } from '@/data/hooks/Theme/useTheme';
+import { View, Text, Dimensions, TouchableOpacity, Linking, Share } from 'react-native'
+import Entypo from '@expo/vector-icons/Entypo';
 import { homeStyles } from '@/styles/homeStyles';
+import { useTheme } from '@/data/hooks/Theme/useTheme';
+import useLinkStore from '@/data/store/useLinkStore';
+import { Link, LinkCardProps } from '@/data/types';
+import Toast from 'react-native-toast-message';
+import AppSkeleton from '../Skeleton'
 import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
-import Entypo from '@expo/vector-icons/Entypo';
-import { Link } from '@/data/types';
-import useLinkStore from '@/data/store/useLinkStore';
 
 
-export interface LinkCardProps {
-    item: Link | number;
-    getCategoryName: (item: Link) => React.ReactNode;
-}
 
-
-const LinkCard = ({ item, getCategoryName }: LinkCardProps) => {
+const LinkCard: React.FunctionComponent<LinkCardProps> = ({ item, getCategoryName }) => {
 
     const { colors } = useTheme();
     const styles = homeStyles();
-    const {toggleModalDeleteLink, setLinkId, setSelectedLink, toggleModalEditLink, selectedLink} = useLinkStore();
 
-    const handldDeletePress =(linkId: string)=>{
+    const { toggleModalDeleteLink, setLinkId, setSelectedLink, toggleModalEditLink, selectedLink } = useLinkStore();
+
+    const handldDeletePress = (linkId: string) => {
         toggleModalDeleteLink();
         setLinkId(linkId);
     }
@@ -67,7 +63,7 @@ const LinkCard = ({ item, getCategoryName }: LinkCardProps) => {
         }
     };
 
-    const handleEditLink =(item: Link)=>{
+    const handleEditLink = (item: Link) => {
         setSelectedLink(item);
         toggleModalEditLink();
     };
@@ -86,10 +82,10 @@ const LinkCard = ({ item, getCategoryName }: LinkCardProps) => {
                                 {getCategoryName(item)}
                             </Text>
                             <View style={styles.crudIconContainer}>
-                                <TouchableOpacity onPress={()=>handldDeletePress(item._id)} style={styles.deleteIcon}>
+                                <TouchableOpacity onPress={() => handldDeletePress(item._id)} style={styles.deleteIcon}>
                                     <Feather name="trash" size={15} color={colors.danger} />
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={()=>handleEditLink(item)} style={styles.icon}>
+                                <TouchableOpacity onPress={() => handleEditLink(item)} style={styles.icon}>
                                     <Feather name="edit" size={15} color={colors.primary} />
                                     <Text style={styles.editText}>Edit</Text>
                                 </TouchableOpacity>

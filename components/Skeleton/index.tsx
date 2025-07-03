@@ -1,27 +1,29 @@
-import React, { memo } from "react";
-import { Skeleton } from "moti/skeleton";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useTheme } from "@/data/hooks/Theme/useTheme";
+import { SkeletonProps, ThemeColors } from "@/data/types";
+import React from "react";
 
-interface SkeletonProps {
-    width: number,
-    height: number
-}
-
-const AppSkeleton = ({ width, height }: SkeletonProps) => {
-    const { theme } = useTheme();
-    const colorMode = theme === "dark" ? "dark" : "light";
+const AppSkeleton: React.FunctionComponent<SkeletonProps> = ({ width, height }) => {
+    const { colors } = useTheme();
+    const styles = sekletonStyles(colors, width, height);
 
     return (
         <View style={{ marginRight: 15 }}>
-            <Skeleton
-                colorMode={colorMode}
-                width={width}
-                height={height}
-                radius={15}
-            />
+            <View style={styles.skeleton} ></View>
         </View>
     );
 };
 
 export default AppSkeleton;
+
+const sekletonStyles = (colors: ThemeColors, width: number, height: number) => {
+    return StyleSheet.create({
+        skeleton: {
+            width: width,
+            height: height,
+            backgroundColor: colors.input,
+            borderRadius: 15
+
+        }
+    })
+}

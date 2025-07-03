@@ -1,12 +1,12 @@
-import useAddLink from '@/data/hooks/Link/useAddLink';
+import React, { useState } from 'react';
+import { ActivityIndicator, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import addStyles from '@/styles/addStyles';
 import { useTheme } from '@/data/hooks/Theme/useTheme';
+import useAddLink from '@/data/hooks/Link/useAddLink';
 import useGetUserData from '@/data/hooks/User/useGetUserData';
 import { LinkModel, LinkSchema } from '@/data/models/LinkModel';
-import addStyles from '@/styles/addStyles';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 import useCategoryStore from '@/data/store/useCategoryStore';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -16,7 +16,7 @@ const Add: React.FunctionComponent = () => {
     const { colors } = useTheme();
     const styles = addStyles();
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
 
     const { data } = useGetUserData();
     const categories = data?.user.categories;
@@ -37,10 +37,26 @@ const Add: React.FunctionComponent = () => {
             reset();
         },
         cbError: (error) => {
-            Toast.show({
-                type: 'error',
-                text1: `Error: ${error.message}`
-            })
+            if (error.response) {
+                const { status } = error.response;
+
+                if (status === 409) {
+                    Toast.show({
+                        type: 'error',
+                        text1: `Link with this Name/URL already exists`
+                    })
+                } else if (status >= 500) {
+                    Toast.show({
+                        type: 'error',
+                        text1: `Server Busy, Please try again later`
+                    })
+                } else {
+                    Toast.show({
+                        type: 'error',
+                        text1: `Error: ${error.message}`
+                    })
+                }
+            }
         }
     })
 
@@ -65,7 +81,7 @@ const Add: React.FunctionComponent = () => {
                             value={value}
                             onBlur={onBlur}
                             onChangeText={onChange}
-                            placeholder='Enter Category Name'
+                            placeholder='Enter Link Title'
                             style={styles.input}
                             placeholderTextColor={colors.placeholder}
                         />
@@ -87,7 +103,7 @@ const Add: React.FunctionComponent = () => {
                             value={value}
                             onBlur={onBlur}
                             onChangeText={onChange}
-                            placeholder='Enter Category Name'
+                            placeholder='Enter Link URL'
                             style={styles.input}
                             placeholderTextColor={colors.placeholder}
                         />
@@ -101,34 +117,46 @@ const Add: React.FunctionComponent = () => {
             </View>
             <View>
                 <Text style={styles.label}>Select Category</Text>
-                <DropDownPicker
-                    open={open}
-                    setOpen={setOpen}
-                    value={selectedCategory?._id || null}
-                    setValue={(callback) => {
-                        const value = callback(selectedCategory?._id || null);
-                        const selected = categories?.find(cat => cat._id === value);
-                        setSelectedCategory(selected || null);
-                    }}
-                    items={categories?.map(category => ({
-                        label: category.name,
-                        value: category._id
-                    })) || []}
-                    placeholder="Select Category"
-                    placeholderStyle={styles.placeHolder}
-                    style={styles.dropDown}
-                    dropDownContainerStyle={styles.dropDownOptions}
-                    textStyle={styles.label}
-                    listItemLabelStyle={styles.label}
-                    onChangeValue={() => {
-                    }}
-                    zIndex={3000}
-                    zIndexInverse={1000}
-                    listMode="SCROLLVIEW"
+                <Controller
+                    control={control}
+                    name="categoryId"
+                    render={({ field: { onChange, value } }) => (
+                        <DropDownPicker
+                            open={open}
+                            setOpen={setOpen}
+                            value={value}
+                            setValue={(callback) => {
+                                const value = callback(selectedCategory?._id || null);
+                                onChange(value);
+                                const selected = categories?.find(category => category._id === value);
+                                setSelectedCategory(selected || null);
+                            }}
+                            items={categories?.map(category => ({
+                                label: category.name,
+                                value: category._id
+                            })) || []}
+                            placeholder="Select Category"
+                            placeholderStyle={styles.placeHolder}
+                            style={styles.dropDown}
+                            dropDownContainerStyle={styles.dropDownOptions}
+                            textStyle={styles.label}
+                            listItemLabelStyle={styles.label}
+                            zIndex={3000}
+                            zIndexInverse={1000}
+                            listMode="SCROLLVIEW"
+                        />
+                    )}
                 />
+                {errors.categoryId && (
+                    <Text style={styles.errorText}>
+                        {errors.categoryId.message}
+                    </Text>
+                )}
             </View>
             <TouchableOpacity disabled={isPending} style={styles.addButton} onPress={handleSubmit(onSubmit)}>
-                <Text style={styles.addButtonText}>Add</Text>
+                <Text style={styles.addButtonText}>
+                    {isPending ? <ActivityIndicator color={'white'} /> : 'Add'}
+                </Text>
             </TouchableOpacity>
         </View>
     )

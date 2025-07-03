@@ -7,6 +7,7 @@ import DeleteModal from '../DeleteModal';
 const DeleteLinkModal: React.FunctionComponent = () => {
 
     const { modalDeleteLink, toggleModalDeleteLink, id } = useLinkStore();
+
     const { isPending: isDelteLinkPending, mutate: deleteLink } = useDeleteLink({
         cb: () => { },
         cbSuccess: () => {
@@ -30,7 +31,7 @@ const DeleteLinkModal: React.FunctionComponent = () => {
 
     return (
         <DeleteModal
-            item="link"
+            text={'link'}
             pending={isDelteLinkPending}
             isVisible={modalDeleteLink}
             onModalClose={toggleModalDeleteLink}

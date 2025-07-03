@@ -1,14 +1,11 @@
 
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import React from 'react';
-import { View, Text  } from 'react-native';
-import { BaseToastProps } from 'react-native-toast-message';
+import { View, Text } from 'react-native';
 import { styles } from './ToastConfigStyle'
+import { CustomToastProps } from '@/data/types';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
-interface CustomToastProps extends BaseToastProps {
-    text1?: string;
-    text2?: string;
-}
+
 
 const toastConfig = {
     error: ({ text1, text2 }: CustomToastProps) => (

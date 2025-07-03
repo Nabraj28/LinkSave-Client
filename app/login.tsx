@@ -1,41 +1,32 @@
 
+import React from 'react';
+import { ActivityIndicator, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { LoginModel, LoginSchema } from '@/data/models/LoginModel';
 import authStyles from '@/styles/authStyles';
-import Entypo from '@expo/vector-icons/Entypo';
+import { useTheme } from '@/data/hooks/Theme/useTheme';
 import { Link, useRouter } from 'expo-router';
-import React from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '@/context/AuthContext';
-import { useTheme } from '@/data/hooks/Theme/useTheme';
-import Toast from "react-native-toast-message";
+import Entypo from '@expo/vector-icons/Entypo';
 
-const Login = () => {
-    const router = useRouter();
+const Login: React.FunctionComponent = () => {
+
     const { colors } = useTheme();
-    const styles = authStyles(colors);
-    const { login } = useAuth();
+    const styles = authStyles();
 
-    const {
-        control,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({
+    const router = useRouter();
+
+    const { login, authState } = useAuth();
+
+    const { control, handleSubmit, formState: { errors }, } = useForm({
         resolver: zodResolver(LoginSchema),
     });
 
     const handleBack = () => router.back();
 
-    const onSubmit = async (data: LoginModel) => {
-        try {
-            await login(data)
-        } catch (error) {
-            Toast.show({
-                type:'error',
-                text1: `Login failed: ${error}`,
-            })
-        }
+    const onSubmit = (data: LoginModel) => {
+        login(data);
     };
 
     return (
@@ -91,7 +82,9 @@ const Login = () => {
                             style={styles.authButton}
                             onPress={handleSubmit(onSubmit)}
                         >
-                            <Text style={styles.buttonText}>Login</Text>
+                            <Text style={styles.buttonText}>
+                                {authState.isLoading ? <ActivityIndicator color='white' /> : 'Login'}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </View>

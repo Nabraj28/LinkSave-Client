@@ -1,8 +1,10 @@
-import { ThemeColors } from "@/data/types";
+import { useTheme } from "@/data/hooks/Theme/useTheme";
 import { StatusBar, StyleSheet, TextStyle } from "react-native";
 
 
-const authStyles = (colors: ThemeColors) => {
+const authStyles = () => {
+
+    const { colors } = useTheme();
 
     const baseText: TextStyle = {
         fontFamily: 'WorkSans-Regular',

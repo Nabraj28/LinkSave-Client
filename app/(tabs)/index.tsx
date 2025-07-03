@@ -13,13 +13,14 @@ import EditLinkModal from "@/components/EditLinkModal";
 import useSearchStore from "@/data/store/useSearchStore";
 import SearchModal from "@/components/SearchModal";
 
-const Home: React.FunctionComponent = () => {
+const Home = () => {
 
-    const {colors} = useTheme();
+    const { colors } = useTheme();
     const styles = homeStyles();
-    const {toggleModalSearch} = useSearchStore();
 
-    const handleSearch =()=>{
+    const { toggleModalSearch } = useSearchStore();
+
+    const handleSearch = () => {
         toggleModalSearch();
     }
 
@@ -31,14 +32,14 @@ const Home: React.FunctionComponent = () => {
                     <AntDesign name="search1" size={28} color={colors.text} />
                 </TouchableOpacity>
             </View>
-            <Category/>
-            <Card/>
+            <Category />
+            <Card />
             <AddCategoryModal />
             <EditCategoryModal />
-            <EditLinkModal/>
-            <DeleteLinkModal/>
-            <DeleteCategoryModal/>
-            <SearchModal/>
+            <EditLinkModal />
+            <DeleteLinkModal />
+            <DeleteCategoryModal />
+            <SearchModal />
         </View>
     );
 };

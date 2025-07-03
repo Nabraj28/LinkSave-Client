@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, TouchableOpacity, TextInput } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, TouchableOpacity, TextInput, ActivityIndicator } from "react-native";
 import upsertModalStyles from "@/styles/upsertStyles";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,10 +8,10 @@ import Toast from "react-native-toast-message";
 import useLinkStore from "@/data/store/useLinkStore";
 import useUpdateLink from "@/data/hooks/Link/useUpdateLink";
 import { useTheme } from "@/data/hooks/Theme/useTheme";
-import { LinkModel, LinkSchema } from "@/data/models/LinkModel";
+import { UpdateLinkModel, UpdateLinkSchema } from "@/data/models/LinkModel";
 
 
-const EditLinkModal = () => {
+const EditLinkModal: React.FunctionComponent = () => {
 
     const { colors } = useTheme();
     const styles = upsertModalStyles(colors);
@@ -27,25 +27,54 @@ const EditLinkModal = () => {
             });
             toggleModalEditLink();
         },
-        cbError: () => {
-            Toast.show({
-                type: 'error',
-                text1: 'Error While Updating Link'
-            })
+        cbError: (error) => {
+            if (error.response) {
+                const { data, status } = error.response;
+                if (status === 400) {
+                    Toast.show({
+                        type: 'error',
+                        text1: 'No changes detected. Modify at least one field to update.'
+                    })
+                } else if (status >= 500) {
+                    Toast.show({
+                        type: 'error',
+                        text1: 'Servery Busy, Please try again later'
+                    })
+                } else {
+                    Toast.show({
+                        type: 'error',
+                        text1: `${data.message}`
+                    })
+                }
+            }
         }
     });
 
 
-    const { control, formState: { errors }, handleSubmit, } = useForm({
-        resolver: zodResolver(LinkSchema),
+    const { control, formState: { errors }, handleSubmit, reset } = useForm({
+        resolver: zodResolver(UpdateLinkSchema),
+        defaultValues: {
+            title: '',
+            url: ''
+        }
     });
 
-    const onSubmit = (data: LinkModel) => {
+    useEffect(() => {
+        if (selectedLink) {
+            reset({
+                title: selectedLink.title,
+                url: selectedLink.url
+            });
+        }
+    }, [selectedLink, reset]);
+
+    const onSubmit = (data: UpdateLinkModel) => {
         mutate({
             linkId: selectedLink?._id,
             payload: data
         })
     };
+
 
     return (
         <GenericModal
@@ -67,7 +96,6 @@ const EditLinkModal = () => {
                                 placeholder="Enter Link Title"
                                 style={styles.nameInput}
                                 placeholderTextColor={colors.placeholder}
-                                defaultValue={selectedLink?.title}
                             />
                         )}
                     />
@@ -86,7 +114,6 @@ const EditLinkModal = () => {
                                 placeholder="Enter Link Url"
                                 style={styles.nameInput}
                                 placeholderTextColor={colors.placeholder}
-                                defaultValue={selectedLink?.url}
                             />
                         )}
                     />
@@ -95,12 +122,13 @@ const EditLinkModal = () => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
+                    activeOpacity={0.7}
                     style={styles.upsertButton}
                     onPress={handleSubmit(onSubmit)}
-                    disabled={isPending}
+                    disabled={isPending || !selectedLink}
                 >
                     <Text style={styles.buttonText}>
-                        {isPending ? 'Updating...' : 'Update'}
+                        {isPending ? <ActivityIndicator color="white" /> : 'Update'}
                     </Text>
                 </TouchableOpacity>
             </View>

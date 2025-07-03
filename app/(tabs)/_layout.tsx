@@ -1,16 +1,16 @@
-import { Tabs } from "expo-router";
-import tabStyles from "@/styles/tabStyles";
 import React from "react";
+import tabStyles from "@/styles/tabStyles";
+import { useTheme } from "@/data/hooks/Theme/useTheme";
+import { Tabs } from "expo-router";
 import { HomeIcon } from "@/assets/icons/HomeIcon";
 import { SettingsIcon } from "@/assets/icons/SettingsIcon";
 import { AddIcon } from "@/assets/icons/AddIcon";
-import { useTheme } from "@/data/hooks/Theme/useTheme";
 
 
 const Layout: React.FunctionComponent = () => {
 
     const { colors } = useTheme();
-    const styles = tabStyles(colors);
+    const styles = tabStyles();
 
 
     return (

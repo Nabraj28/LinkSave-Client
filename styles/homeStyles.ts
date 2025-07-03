@@ -1,5 +1,4 @@
 import { useTheme } from "@/data/hooks/Theme/useTheme";
-import { ThemeColors } from "@/data/types";
 import { StyleSheet, TextStyle, ViewStyle, Dimensions } from "react-native";
 
 

@@ -12,9 +12,6 @@ export const themes = {
         border: '#C2C2C2',
         themeIcon: '#5D616A',
         subheader: '',
-        activeIcon: '#000',
-        inactiveIcon: '#999',
-        secondary: '#5856D6',
     },
     dark: {
         background: '#121212',
@@ -29,9 +26,7 @@ export const themes = {
         border: '#343831',
         themeIcon: '#CAD1D9',
         subheader: '#a4a4a6',
-        activeIcon: '#FFFFFF',
-        inactiveIcon: '#FDFCFA',
-        secondary: '#5E5CE6',
+
     },
 };
 

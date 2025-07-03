@@ -1,14 +1,8 @@
 import React from "react";
-
-
-export interface MutationHookProps<T> {
-    cb?: () => void;
-    cbSuccess?: (data: T) => void;
-    cbError?: (error: Error) => void;
-}
+import { BaseToastProps } from 'react-native-toast-message';
 
 export type AuthState = {
-    user: MinimalUser | null;
+    user: User | null;
     isAuthenticated: boolean;
     isLoading: boolean;
 };
@@ -20,6 +14,48 @@ export type AuthContextType = {
     logout: () => Promise<void>;
 };
 
+export interface ContextProviderProps {
+    children: React.ReactNode
+}
+
+export type ThemeName = 'light' | 'dark';
+
+export interface ThemeColors {
+    primary: string;
+    text: string;
+    background: string;
+    tabbackground: string;
+    buttonBackground: string;
+    input?: string;
+    placeholder: string;
+    card: string;
+    danger: string;
+    themeIcon: string;
+    border: string;
+    subheader: string;
+}
+
+export interface Theme {
+    name: ThemeName;
+    colors: ThemeColors;
+}
+
+export interface ApiError extends Error {
+    response?: {
+        status: number;
+        data: {
+            message?: string;
+            error?: string;
+        };
+    };
+}
+
+export interface MutationHookProps<T> {
+    cb?: () => void;
+    cbSuccess?: (data: T) => void;
+    cbError?: (error: ApiError) => void;
+}
+
 export interface LoginRequest {
     email: string,
     password: string
@@ -29,19 +65,6 @@ export interface RegisterRequest {
     username: string,
     email: string,
     password: string
-}
-
-export interface LinkSaveResponse {
-    success: boolean,
-    message: string,
-    user: User,
-    token: string,
-}
-
-export interface MinimalUser {
-    _id: string,
-    username: string,
-    email: string
 }
 
 export interface User {
@@ -57,12 +80,18 @@ export interface CategoryResponse {
     _v?: number
 }
 
-
 export interface Link {
     _id: string,
     title: string,
     url: string,
     __v: number
+}
+
+export interface LinkSaveResponse {
+    success: boolean,
+    message: string,
+    user: User,
+    token: string,
 }
 
 export interface IconProps {
@@ -72,30 +101,19 @@ export interface IconProps {
     indicatorColor?: string;
 }
 
-// types/theme.ts
-export type ThemeName = 'light' | 'dark';
-
-export interface ThemeColors {
-    background: string;
-    tabbackground: string;
-    buttonBackground: string;
-    text: string;
-    input?: string;
-    placeholder: string;
-    card: string;
-    danger: string;
-    themeIcon: string;
-    subheader?: string;
-    activeIcon: string;
-    inactiveIcon: string;
-    primary: string;
-    secondary: string;
-    border: string;
+export interface LinkCardProps {
+    item: Link | number;
+    getCategoryName: (item: Link) => React.ReactNode;
 }
 
-export interface Theme {
-    name: ThemeName;
-    colors: ThemeColors;
+export interface SkeletonProps {
+    width: number,
+    height: number
+}
+
+export interface CustomToastProps extends BaseToastProps {
+    text1?: string;
+    text2?: string;
 }
 
 export interface UpsertModalProps {
@@ -105,16 +123,8 @@ export interface UpsertModalProps {
     children: React.ReactNode
 }
 
-export interface DeleteLinkResponse {
-    success: boolean,
-    message: string,
-    deletedLink: Link
-}
-
-export interface DeleteCategoryResponse {
-    success: boolean,
-    message: string,
-    deletedCategory: CategoryResponse
+export interface AddCategoryRequest {
+    name: string
 }
 
 export interface AddCategoryResponse {
@@ -123,21 +133,10 @@ export interface AddCategoryResponse {
     category: CategoryResponse
 }
 
-export interface DeleteModalProps {
-    item: string,
-    isVisible: boolean,
-    onModalClose: () => void,
-    onDelete: () => void;
-    pending: boolean
-}
-
 interface UpdateCategoryRequest {
     name: string,
 }
 
-export interface AddCategoryRequest {
-    name: string
-}
 export interface UpdateCategoryPayload {
     categoryId?: string,
     payload: UpdateCategoryRequest
@@ -149,19 +148,23 @@ export interface UpdateCategoryResponse {
     category: CategoryResponse
 }
 
+export interface DeleteModalProps {
+    text: string,
+    isVisible: boolean,
+    onModalClose: () => void,
+    onDelete: () => void;
+    pending: boolean
+}
+
+export interface DeleteCategoryResponse {
+    success: boolean,
+    message: string,
+    deletedCategory: CategoryResponse
+}
+
 interface LinkPayload {
     title: string,
     url: string
-}
-export interface UpdateLinkRequest {
-    linkId?: string;
-    payload: LinkPayload
-}
-
-export interface UpdateLinkResponse {
-    success: boolean;
-    message: string;
-    link: Link
 }
 
 export interface AddLinkRequest {
@@ -172,4 +175,20 @@ export interface AddLinkResponse {
     success: boolean;
     message: string;
     link: Link
+}
+
+export interface UpdateLinkRequest {
+    linkId?: string;
+    payload: LinkPayload
+}
+
+export interface UpdateLinkResponse {
+    success: boolean;
+    message: string;
+    link: Link
+}
+export interface DeleteLinkResponse {
+    success: boolean,
+    message: string,
+    deletedLink: Link
 }

@@ -1,37 +1,32 @@
 
-import authStyles from '@/styles/authStyles';
-import Entypo from '@expo/vector-icons/Entypo';
-import { Link, useRouter } from 'expo-router';
 import React from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import authStyles from '@/styles/authStyles';
+import { useTheme } from '@/data/hooks/Theme/useTheme';
+import { Link, useRouter } from 'expo-router';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RegisterModel, RegisterSchema } from '@/data/models/RegisterModel';
 import { useAuth } from '@/context/AuthContext';
-import { useTheme } from '@/data/hooks/Theme/useTheme';
+import Entypo from '@expo/vector-icons/Entypo';
 
-const Register = () => {
-    const router = useRouter();
+const Register: React.FunctionComponent = () => {
+
     const { colors } = useTheme();
-    const styles = authStyles(colors);
-    const { register } = useAuth();
+    const styles = authStyles();
 
-    const {
-        control,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({
+    const router = useRouter();
+
+    const { register, authState } = useAuth();
+
+    const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(RegisterSchema),
     });
 
     const handleBack = () => router.back();
 
-    const onSubmit = async (data: RegisterModel) => {
-        try {
-            await register(data)
-        } catch (error) {
-            Alert.alert('Register failed')
-        }
+    const onSubmit = (data: RegisterModel) => {
+        register(data)
     };
 
     return (
@@ -105,7 +100,9 @@ const Register = () => {
                             style={styles.authButton}
                             onPress={handleSubmit(onSubmit)}
                         >
-                            <Text style={styles.buttonText}>Register</Text>
+                            <Text style={styles.buttonText}>
+                                {authState.isLoading ? <ActivityIndicator color='white' /> : 'Register'}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </View>

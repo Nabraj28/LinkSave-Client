@@ -6,7 +6,7 @@ import upsertModalStyles from '../../styles/upsertStyles';
 import { UpsertModalProps } from '@/data/types';
 
 
-const GenericModal = ({ title, visible, onClose, children }: UpsertModalProps) => {
+const GenericModal: React.FunctionComponent<UpsertModalProps> = ({ title, visible, onClose, children }) => {
 
     const { colors, theme } = useTheme();
     const styles = upsertModalStyles(colors, theme);

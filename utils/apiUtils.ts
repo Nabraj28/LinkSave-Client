@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: 'https://linksave-xomt.onrender.com/api/v1'
+    baseURL: 'https://linksave-server.vercel.app/api/v1'
 });
 
 axiosInstance.interceptors.request.use(async (config) => {

@@ -1,7 +1,9 @@
-import { ThemeColors } from "@/data/types";
+import { useTheme } from "@/data/hooks/Theme/useTheme";
 import { StatusBar, StyleSheet, TextStyle, ViewStyle } from "react-native";
 
-const welcomeStyles = (colors: ThemeColors) => {
+const welcomeStyles = () => {
+
+    const { colors } = useTheme();
 
     const textStyle: TextStyle = {
         textAlign: 'center',

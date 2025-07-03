@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
         borderRadius: 8,
         borderWidth: 1,
         marginHorizontal: '5%',
+
     },
     errorToast: {
         backgroundColor: '#FEF3F2',

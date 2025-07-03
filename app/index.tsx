@@ -1,16 +1,14 @@
 
-import { useTheme } from '@/data/hooks/Theme/useTheme';
-import welcomeStyles from '@/styles/welcomeStyles';
-import { useRouter } from 'expo-router';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import welcomeStyles from '@/styles/welcomeStyles';
+import { useRouter } from 'expo-router';
 
 
 const Welcome: React.FunctionComponent = () => {
 
     const router = useRouter();
-    const { colors } = useTheme();
-    const styles = welcomeStyles(colors);
+    const styles = welcomeStyles();
 
     const handleLogin = () => router.push('/login');
     const handleRegister = () => router.push('/register');

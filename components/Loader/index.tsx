@@ -1,8 +1,8 @@
-import { useTheme } from '@/data/hooks/Theme/useTheme';
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
+import { useTheme } from '@/data/hooks/Theme/useTheme';
 
-const Loader = () => {
+const Loader: React.FunctionComponent = () => {
 
     const { colors } = useTheme();
 

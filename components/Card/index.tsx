@@ -1,13 +1,13 @@
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import React from 'react';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { homeStyles } from '@/styles/homeStyles';
+import useGetUserData from '@/data/hooks/User/useGetUserData';
 import useCategoryStore from '@/data/store/useCategoryStore';
 import { Link } from '@/data/types';
 import LinkCard from '../LinkCard';
-import useGetUserData from '@/data/hooks/User/useGetUserData';
 
 
-const Card = () => {
+const Card: React.FunctionComponent = () => {
 
     const styles = homeStyles();
 
@@ -30,7 +30,7 @@ const Card = () => {
     };
 
     const renderItem = ({ item }: { item: Link | number }) => (
-        <LinkCard  item={item} getCategoryName={getCategoryName} />
+        <LinkCard item={item} getCategoryName={getCategoryName} />
     );
 
 

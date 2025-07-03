@@ -1,16 +1,17 @@
-import { FlatList, TouchableOpacity, View, Text } from 'react-native';
 import React, { useEffect, useMemo } from 'react';
-import { CategoryResponse } from '@/data/types';
+import { FlatList, TouchableOpacity, View, Text } from 'react-native';
 import { homeStyles } from '@/styles/homeStyles';
-import { AntDesign } from '@expo/vector-icons';
-import useCategoryStore from '@/data/store/useCategoryStore';
-import AppSkeleton from '../Skeleton';
 import useGetUserData from '@/data/hooks/User/useGetUserData';
+import useCategoryStore from '@/data/store/useCategoryStore';
+import { CategoryResponse } from '@/data/types';
+import AppSkeleton from '../Skeleton';
+import { AntDesign } from '@expo/vector-icons';
 
 
-const Category = () => {
+const Category: React.FunctionComponent = () => {
 
     const styles = homeStyles();
+
     const { data, isLoading } = useGetUserData();
     const skeletonData = [1, 2, 3, 4];
 
