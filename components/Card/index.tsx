@@ -5,12 +5,12 @@ import useGetUserData from '@/data/hooks/User/useGetUserData';
 import useCategoryStore from '@/data/store/useCategoryStore';
 import { Link } from '@/data/types';
 import LinkCard from '../LinkCard';
-import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+// import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 
 
 const Card: React.FunctionComponent = () => {
 
-    const bannerRef = useRef<BannerAd>(null);
+    // const bannerRef = useRef<BannerAd>(null);
 
     const styles = homeStyles();
 
@@ -20,7 +20,7 @@ const Card: React.FunctionComponent = () => {
 
     const skeletonData = [1, 2, 3, 4];
 
-    const adUnitId = "ca-app-pub-8896855737169894/6546849550";
+    // const adUnitId = __DEV__ ? TestIds.ADAPTIVE_BANNER : "ca-app-pub-8896855737169894/6546849550";
 
     const getCategoryName = (item: Link) => {
         if (selectedCategory?.name === 'All') {
@@ -50,7 +50,7 @@ const Card: React.FunctionComponent = () => {
                     }
                 </View>
             }
-            <BannerAd ref={bannerRef} unitId={adUnitId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
+            {/* <BannerAd ref={bannerRef} unitId={adUnitId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} /> */}
             <FlatList
                 data={isLoading ? skeletonData : selectedCategory?.links}
                 renderItem={renderItem}

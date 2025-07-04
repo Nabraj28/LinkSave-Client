@@ -16,7 +16,7 @@ const Welcome: React.FunctionComponent = () => {
     return (
         <View style={styles.authContainer}>
             <View style={styles.separator}>
-                <Text style={styles.headerText}>Welcome to SaveLink</Text>
+                <Text style={styles.headerText}>Welcome to LinkSave</Text>
                 <Text style={styles.subHeaderText}>
                     Please login to your account or create{"\n"}
                     new account to continue
