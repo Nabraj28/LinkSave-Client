@@ -4,6 +4,8 @@ import { useTheme } from '@/data/hooks/Theme/useTheme';
 import settingsStyle from '@/styles/settingsStyle';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { MaterialIcons } from '@expo/vector-icons';
+import DeleteAccountModal from '@/components/DeleteAccountModal';
+import useUserStore from '@/data/store/useUserStore';
 
 const Settings = () => {
 
@@ -12,9 +14,11 @@ const Settings = () => {
     const { logout } = useAuth();
     const { theme, toggleTheme } = useTheme();
 
+    const { toggleModalDeleteUser } = useUserStore()
+
     const handleChangeTheme = (mode: string) => {
         toggleTheme(mode);
-    }
+    };
 
     const handleLogout = () => {
         logout();
@@ -25,7 +29,7 @@ const Settings = () => {
         <View style={styles.settingsContainer}>
             <Text style={styles.headerText}>Settings</Text>
             <View>
-                <Text style={styles.sectionLabel}>Theme</Text>
+                <Text style={styles.sectionHeader}>Theme</Text>
                 <View style={styles.sectionContainer}>
                     <TouchableOpacity
                         onPress={() => handleChangeTheme('light')}
@@ -44,7 +48,7 @@ const Settings = () => {
                 </View>
             </View>
             <View>
-                <Text style={styles.sectionLabel}>App Info</Text>
+                <Text style={styles.sectionHeader}>App Info</Text>
                 <View style={styles.sectionContainer}>
                     <View style={styles.contentContainer}>
                         <Text style={styles.contentText}>Version</Text>
@@ -59,6 +63,22 @@ const Settings = () => {
                     </TouchableOpacity>
                 </View>
             </View>
+            <View>
+                <Text style={styles.sectionHeader}>Delete Account</Text>
+                <View style={styles.sectionContainer}>
+                    <View style={styles.contentContainer}>
+                        <Text style={styles.contentText}>
+                            By deleting your account, you'll no longer be able to access your links or log into Linksave
+                        </Text>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity style={styles.deleteButton} onPress={toggleModalDeleteUser}>
+                            <Text style={styles.deleteText}>Delete</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+            <DeleteAccountModal />
         </View>
     );
 };

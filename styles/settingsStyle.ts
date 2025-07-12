@@ -26,8 +26,9 @@ const settingsStyle = () => {
             fontFamily: 'WorkSans-Bold'
         },
 
-        sectionLabel: {
-            ...baseText
+        sectionHeader: {
+            ...baseText,
+            fontFamily: 'WorkSans-Medium'
         },
 
         sectionContainer: {
@@ -57,10 +58,27 @@ const settingsStyle = () => {
         },
         contentText: {
             ...baseText,
-            color: colors.text
+            color: colors.text,
+            textAlign: 'justify'
         },
         contentIcon: {
             color: colors.themeIcon
+        },
+        buttonContainer: {
+            padding: 10
+        },
+        deleteButton: {
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: colors.input,
+            paddingVertical: 12,
+            borderRadius: 10,
+            marginBottom: 10,
+        },
+        deleteText: {
+            ...baseText
         }
     })
 };

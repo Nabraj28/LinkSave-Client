@@ -192,3 +192,19 @@ export interface DeleteLinkResponse {
     message: string,
     deletedLink: Link
 }
+
+
+export interface DeletedUser {
+    _id: string;
+    username: string;
+    email: string;
+}
+export interface DeleteUserResponse {
+    success: boolean;
+    message: string;
+    user: DeletedUser
+}
+
+export interface DeleteUserPayload {
+    userId?: string;
+}

@@ -1,6 +1,6 @@
 import Loader from "@/components/Loader";
 import { useAuth } from "@/context/AuthContext";
-import { useFonts, WorkSans_400Regular, WorkSans_700Bold } from "@expo-google-fonts/work-sans";
+import { useFonts, WorkSans_400Regular, WorkSans_700Bold, WorkSans_500Medium } from "@expo-google-fonts/work-sans";
 import { Stack, useRouter } from "expo-router";
 import { useEffect } from "react";
 
@@ -30,6 +30,7 @@ const AuthGate = () => {
 
   const [fontsLoaded] = useFonts({
     'WorkSans-Regular': WorkSans_400Regular,
+    'WorkSans-Medium': WorkSans_500Medium,
     'WorkSans-Bold': WorkSans_700Bold,
   });
 
