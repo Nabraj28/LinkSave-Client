@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query"
 
 
 const useDeleteUser = ({ cb, cbSuccess, cbError }: MutationHookProps<DeleteUserResponse>) => {
-    return useMutation<DeleteUserResponse, Error, DeleteUserPayload>({
+    return useMutation<DeleteUserResponse, Error, string | undefined>({
         mutationFn: (userId) => {
             const endpoint = `/users/${userId}`
             return deleteData(endpoint)

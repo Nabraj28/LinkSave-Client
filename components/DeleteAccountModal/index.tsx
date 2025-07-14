@@ -21,7 +21,8 @@ const DeleteAccountModal: React.FunctionComponent = () => {
             await AsyncStorage.removeItem('authToken');
             window.location.reload();
         },
-        cbError: () => {
+        cbError: (error) => {
+            console.log('Full error:', error.response?.data || error.message);
             Toast.show({
                 type: 'error',
                 text1: 'Error While Deleting Account',
@@ -30,13 +31,19 @@ const DeleteAccountModal: React.FunctionComponent = () => {
         }
     });
 
-    const handleDeleteLink = () => {
-        mutate({ userId: authState.user?._id })
+    const handleDeleteLink = async () => {
+        const token = await AsyncStorage.getItem('authToken');
+        if (!token) {
+            console.log('No Token')
+        } else {
+            console.log('Token exists')
+        }
+        mutate(authState.user?._id)
     };
 
     return (
         <DeleteModal
-            text={'link'}
+            text={'Account'}
             pending={isPending}
             isVisible={modalDeleteUser}
             onModalClose={toggleModalDeleteUser}

@@ -49,13 +49,25 @@
       [
         "react-native-google-mobile-ads",
         {
-          "androidAppId": "ca-app-pub-8896855737169894~1047929105",
+          "androidAppId": "ca-app-pub-7069848603628400~6689974302",
           "iosAppId": "ca-app-pub-8896855737169894~1712507035"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "e6602648-36a7-4286-9782-c540980d51c5"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e6602648-36a7-4286-9782-c540980d51c5"
     }
   }
 }
